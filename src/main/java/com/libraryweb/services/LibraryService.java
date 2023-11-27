@@ -45,7 +45,18 @@ public class LibraryService implements DataLibraryInterface{
 	}
 
 	@Override
-	public boolean updatebook(Object id, Object book) {
+	public boolean updatebook(Object id, Book book) {
+		long result = jdbcTemplate.update("UPDATE BOOK SET IdBook = ?, Title = ?, Author = ?, Isbn = ?, Genre = ? WHERE Idbook = ?",
+				book.getId(),
+				book.getTitle(),
+				book.getAuthor(),
+				book.getIsbn(),
+				book.getGenre(),
+				(long)id
+				);
+		if(result>0) {
+			return true;
+		}
 		// TODO Auto-generated method stub
 		return false;
 	}
