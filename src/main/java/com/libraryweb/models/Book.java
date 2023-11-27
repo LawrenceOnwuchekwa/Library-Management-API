@@ -1,15 +1,6 @@
 package com.libraryweb.models;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-@Data
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
 
 public class Book {
 
@@ -23,6 +14,7 @@ public class Book {
 	
 	private String genre;
 
+	
 	public Book(Long id, String title, String author, String isbn, String genre) {
 		super();
 		this.id = id;

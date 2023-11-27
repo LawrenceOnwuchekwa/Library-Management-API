@@ -65,13 +65,22 @@ public class LibraryService implements DataLibraryInterface{
 
 	@Override
 	public boolean deletebookId(Object id) {
+		
+		long result = jdbcTemplate.update("DELETE FROM BOOK WHERE IdBook = ? ", (long)id);
 		// TODO Auto-generated method stub
+		if(result>0) {
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean deletebookTitle(Object title) {
 		// TODO Auto-generated method stub
+		long result = jdbcTemplate.update("DELETE FROM BOOK WHERE Title = ? ",(String)title);
+		if(result>0) {
+			return true;
+		}
 		return false;
 	}
 
