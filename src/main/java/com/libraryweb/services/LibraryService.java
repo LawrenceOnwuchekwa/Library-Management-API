@@ -13,7 +13,7 @@ import com.libraryweb.models.Book;
 import com.libraryweb.models.BookMapper;
 
 @Repository
-public class LibraryService implements DataLibraryInterface{
+public class LibraryService implements DataLibraryInterface<Book,Long,String>{
 	
 	@Autowired
 	DataSource dataSource;
@@ -25,17 +25,17 @@ public class LibraryService implements DataLibraryInterface{
 	BookMapper bookMapper;
 
 	@Override
-	public List<Book> searchbookTitle(Object title) {
+	public List<Book> searchbookTitle(String title) {
 		// TODO Auto-generated method stub
-		List<Book> result = jdbcTemplate.query("SELECT * FROM BOOK WHERE Title LIKE ? ", bookMapper, "%" + (String)title + "%");
+		List<Book> result = jdbcTemplate.query("SELECT * FROM BOOK WHERE Title LIKE ? ", bookMapper, "%" + title + "%");
 		return result;
 		
 	}
 
 	@Override
-	public Book searchbookId(Object id) {
+	public Book searchbookId(Long id) {
 		
-		List<Book> result = jdbcTemplate.query("SELECT * FROM BOOK WHERE IdBook = ?", bookMapper, (long)id);
+		List<Book> result = jdbcTemplate.query("SELECT * FROM BOOK WHERE IdBook = ?", bookMapper, id);
 		
 		// TODO Auto-generated method stub
 		if(result.size()>0) {
@@ -45,8 +45,8 @@ public class LibraryService implements DataLibraryInterface{
 	}
 
 	@Override
-	public boolean updatebook(Object id, Book book) {
-		long result = jdbcTemplate.update("UPDATE BOOK SET IdBook = ?, Title = ?, Author = ?, Isbn = ?, Genre = ? WHERE Idbook = ?",
+	public boolean updatebook(Long id, Book book) {
+		long result = jdbcTemplate.update("UPDATE BOOK SET IdB ook = ?, Title = ?, Author = ?, Isbn = ?, Genre = ? WHERE Idbook = ?",
 				book.getId(),
 				book.getTitle(),
 				book.getAuthor(),
@@ -75,9 +75,9 @@ public class LibraryService implements DataLibraryInterface{
 	}
 
 	@Override
-	public boolean deletebookId(Object id) {
+	public boolean deletebookId(Long id) {
 		
-		long result = jdbcTemplate.update("DELETE FROM BOOK WHERE IdBook = ? ", (long)id);
+		long result = jdbcTemplate.update("DELETE FROM BOOK WHERE IdBook = ? ", id);
 		// TODO Auto-generated method stub
 		if(result>0) {
 			return true;
@@ -86,9 +86,9 @@ public class LibraryService implements DataLibraryInterface{
 	}
 
 	@Override
-	public boolean deletebookTitle(Object title) {
+	public boolean deletebookTitle(String title) {
 		// TODO Auto-generated method stub
-		long result = jdbcTemplate.update("DELETE FROM BOOK WHERE Title = ? ",(String)title);
+		long result = jdbcTemplate.update("DELETE FROM BOOK WHERE Title = ? ",title);
 		if(result>0) {
 			return true;
 		}

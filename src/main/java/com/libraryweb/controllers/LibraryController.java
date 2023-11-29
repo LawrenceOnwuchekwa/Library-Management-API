@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.libraryweb.data.LibraryDataServiceforRepository;
+import com.libraryweb.data.LibraryRepositoryInterface;
 import com.libraryweb.models.Book;
+import com.libraryweb.models.BookEntity;
 import com.libraryweb.services.LibraryService;
 
 @RestController
@@ -24,14 +27,17 @@ public class LibraryController {
 	@Autowired
 	LibraryService libraryservice;
 	
+	@Autowired
+	LibraryDataServiceforRepository serve;
+	
 	@GetMapping("/")
-	public List<Book> showallbooks(){
-		List<Book> gotcha = libraryservice.showallbooks();
+	public List<BookEntity> showallbooks(){
+		List<BookEntity> gotcha = serve.showallbooks();
 		return gotcha;
 	}
 	@PutMapping("/updateId/{id}")
-	public boolean updatebooks(@RequestBody Book book,@PathVariable(name="id") long id) {
-		return libraryservice.updatebook(id, book);
+	public boolean updatebooks(@RequestBody BookEntity book,@PathVariable(name="id") long id) {
+		return serve.updatebook(id, book);
 	}
 	
 	@PostMapping("/")

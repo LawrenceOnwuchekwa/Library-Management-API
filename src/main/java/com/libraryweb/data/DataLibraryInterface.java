@@ -4,13 +4,12 @@ import java.util.List;
 
 import com.libraryweb.models.Book;
 
-public interface DataLibraryInterface<T> {
-	List<Book> searchbookTitle(T title);
-	Book searchbookId(T id);
-	boolean updatebook(T id, Book book);
-	long addbook(Book book);
-	boolean deletebookId(T id);
-	boolean deletebookTitle(T title);
-	List<Book> showallbooks();
-
+public interface DataLibraryInterface<T,U,X> {
+	List<T> searchbookTitle(X title);
+	T searchbookId(U id);
+	boolean updatebook(U id, T book);
+	long addbook(T book);
+	boolean deletebookId(U id);
+	boolean deletebookTitle(X title);
+	List<T> showallbooks();
 }
